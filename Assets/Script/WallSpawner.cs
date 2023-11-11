@@ -10,13 +10,33 @@ public class WallSpawner : MonoBehaviour
 
     public float maxHeightWall;
     public float minHeightWall;
+
+    public float maxHeightShortWall;
+    public float minHeightShortWall;
+
+    public float carPos;
+
+    public float groundGrindHeight;
+
+    public float maxHeightSign;
+    public float minHeightSign;
+
     public float maxHeightGrind;
     public float minHeightGrind;
 
+    // Obstacles
     public GameObject wallPrefab;
-    public GameObject grindPrefab;
+    public GameObject shortWallPrefab;
+    public GameObject carPrefab;
+
+    // Grinds
+    public GameObject groundGrindPrefab;
+    public GameObject farmaciaPrefab;
+    public GameObject pizzeriaPrefab;
+    public GameObject roofPrefab;
+
     GameObject wall;
-    GameObject grind;
+    GameObject groundGrind;
 
     // Start is called before the first frame update
     void Start()
@@ -29,16 +49,42 @@ public class WallSpawner : MonoBehaviour
     {
         if(time > maxTime){
 
-            int randomChoice = Random.Range(0, 2);
+            int randomChoice = Random.Range(0, 7);
 
             if(randomChoice == 0) {
                 // Elige una pared
                 GameObject wall =  Instantiate(wallPrefab);
                 wall.transform.position = transform.position + new Vector3(0, Random.Range(minHeightWall, maxHeightWall), 0);
-            } else {
-                // O elige un grind
-                GameObject grind = Instantiate(grindPrefab);
-                grind.transform.position = transform.position + new Vector3(0, Random.Range(minHeightGrind, maxHeightGrind), 0);
+
+            } else if (randomChoice == 1) {
+                // Elige un grind en el piso
+                GameObject groundGrind = Instantiate(groundGrindPrefab);
+                groundGrind.transform.position = transform.position + new Vector3(0, groundGrindHeight, 0);
+
+            } else if (randomChoice == 2) {
+                // Elige un cartel de pizzeria
+                GameObject pizzeriaGrind = Instantiate(pizzeriaPrefab);
+                pizzeriaGrind.transform.position = transform.position + new Vector3(0, Random.Range(minHeightSign, maxHeightSign), 0);
+
+            } else if (randomChoice == 3) {
+                // Elige un cartel de farmacia
+                GameObject farmaciaGrind = Instantiate(farmaciaPrefab);
+                farmaciaGrind.transform.position = transform.position + new Vector3(0, Random.Range(minHeightSign, maxHeightSign), 0);
+
+            } else if (randomChoice == 4) {
+                // Elige un techo
+                GameObject roofGrind = Instantiate(roofPrefab);
+                roofGrind.transform.position = transform.position + new Vector3(0, Random.Range(minHeightSign, maxHeightSign), 0);
+
+            } else if(randomChoice == 5) {
+                // Elige una pared baja
+                GameObject shortWall =  Instantiate(shortWallPrefab);
+                shortWall.transform.position = transform.position + new Vector3(0, Random.Range(minHeightShortWall, maxHeightShortWall), 0);
+                
+            } else if(randomChoice == 6) {
+                // Elige un auto
+                GameObject car =  Instantiate(carPrefab);
+                car.transform.position = transform.position + new Vector3(0, carPos, 0);
             }
 
             time = 0;

@@ -19,20 +19,10 @@ public class GameManager : MonoBehaviour
     int score;
     public TMP_Text scoreText;
 
-    public GameObject GameOverPannel;
-    public TMP_Text currentText;
-    public TMP_Text highScoreText;
-    public Button restartButton;
-
 
     private void Start() {
         score = 0;
         scoreText.text = score.ToString();
-        GameOverPannel.SetActive(false);
-        restartButton.onClick.RemoveAllListeners();
-        restartButton.onClick.AddListener(RestartLevel);
-
-        currentText.text =  PlayerPrefs.GetInt("Score").ToString();
         
     }
 
@@ -43,14 +33,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(){
-        if (score > PlayerPrefs.GetInt("HighScore")){
-            PlayerPrefs.SetInt("HighScore", score);
-        }
-
-        PlayerPrefs.SetInt("Score", score);
-        currentText.text = PlayerPrefs.GetInt("Score").ToString();
-        GameOverPannel.SetActive(true);
-        highScoreText.text = PlayerPrefs.GetInt("HighScore").ToString();
+        PlayerPrefs.SetInt("score", score);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void RestartLevel(){
