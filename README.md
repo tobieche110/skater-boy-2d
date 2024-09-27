@@ -1,4 +1,4 @@
-#Skate Boy 2D
+# Skate Boy 2D
 Game proyect me and my team had to develop. Is a 2D runner where you have to jump obstacles.
 
 Screenshots:
